@@ -251,13 +251,13 @@ export function allowedConnections(m) {
 
 export function connections(m, type = undefined, ...strategies) {
   if (arguments.length === 1) {
-    return get(m, "connections", Map())
+    return tget(m, "connections", Map())
       .filter((v, k) => k !== "unknown")
       .valueSeq()
       .flatten(true);
   }
 
-  const xs = get(m, ["connections", type], List());
+  const xs = tget(m, ["connections", type], List());
   return strategies.length > 0
     ? xs.filter(x => ~strategies.indexOf(x.get("strategy")))
     : xs;
@@ -299,7 +299,7 @@ export function filterConnections(m) {
 
   return tset(
     m,
-    ["connections"],
+    "connections",
     clientConnections(m).map(cs => {
       return cs
         .filter(c => order(c) >= 0)
