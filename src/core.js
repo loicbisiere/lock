@@ -116,8 +116,8 @@ export default class Base extends EventEmitter {
     });
   }
 
-  show() {
-    openLock(this.id);
+  show(opts = {}) {
+    openLock(this.id, opts);
   }
 
   hide() {
